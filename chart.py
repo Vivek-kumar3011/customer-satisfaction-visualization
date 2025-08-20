@@ -22,30 +22,28 @@ data = pd.DataFrame({
 sns.set_style("whitegrid")
 sns.set_context("talk")
 
-plt.figure(figsize=(8, 8))  # 512x512 pixels at dpi=64
+plt.figure(figsize=(8, 8))  # 8x8 inches * 64 dpi = 512x512
 
-# Barplot (mean satisfaction by category with confidence intervals)
 ax = sns.barplot(
     data=data,
     x="Category",
     y="Satisfaction",
-    hue="Category",     # ✅ fix for FutureWarning
-    legend=False,       # ✅ avoids duplicate legends
+    hue="Category",
+    legend=False,
     palette="viridis",
     errorbar="ci"
 )
 
-# Customize plot
 ax.set_title("Average Customer Satisfaction by Product Category", fontsize=16, pad=20)
 ax.set_xlabel("Product Category", fontsize=14)
 ax.set_ylabel("Average Satisfaction Score", fontsize=14)
-ax.set_ylim(0, 10)  # Satisfaction scale (0-10)
+ax.set_ylim(0, 10)
 
 plt.xticks(rotation=30, ha="right")
 sns.despine()
 
 # -------------------------------
-# Save Chart
+# Save Chart (EXACT 512x512)
 # -------------------------------
-plt.savefig("chart.png", dpi=64, bbox_inches="tight")
+plt.savefig("chart.png", dpi=64, bbox_inches=None)  # ✅ keeps 512x512 exact
 plt.close()
